@@ -14,6 +14,10 @@ public class DayDescription implements Serializable {
     @OrderColumn(name="start")
     private Nap [] naps;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+    @OrderColumn(name="time")
+    private Feeding[] feedings;
+
     public Nap[] getNaps() {
         return naps;
     }
@@ -44,5 +48,13 @@ public class DayDescription implements Serializable {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public Feeding[] getFeedings() {
+        return feedings;
+    }
+
+    public void setFeedings(Feeding[] feedings) {
+        this.feedings = feedings;
     }
 }
