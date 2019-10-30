@@ -1,10 +1,13 @@
 package org.rietdijk.babyschedule.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name="nap")
+@Table(name = "nap")
 public class Nap implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,8 +15,18 @@ public class Nap implements Serializable {
     private String start;
     private String end;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="dayId", insertable=false, updatable=false)
+    @JsonBackReference
+    @ManyToOne
+    DayDescription day;
+
+    public DayDescription getDay() {
+        return day;
+    }
+
+    public void setDay(DayDescription day) {
+        this.day = day;
+    }
+
     public int getNapId() {
         return napId;
     }
@@ -37,4 +50,5 @@ public class Nap implements Serializable {
     public void setEnd(String end) {
         this.end = end;
     }
+
 }

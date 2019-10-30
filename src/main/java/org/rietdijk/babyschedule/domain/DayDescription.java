@@ -1,7 +1,10 @@
 package org.rietdijk.babyschedule.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name="Day")
@@ -10,19 +13,20 @@ public class DayDescription implements Serializable {
     private int id;
     private String description;
     private String date;
-    @OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
-    @OrderColumn(name="start")
-    private Nap [] naps;
+    @OneToMany(mappedBy ="day")
+    @JsonManagedReference
+    private List<Nap> naps;
 
     @OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
     @OrderColumn(name="time")
+    @JoinColumn(name="dayId",referencedColumnName="id")
     private Feeding[] feedings;
 
-    public Nap[] getNaps() {
+    public List<Nap> getNaps() {
         return naps;
     }
 
-    public void setNaps(Nap[] naps) {
+    public void setNaps(List<Nap> naps) {
         this.naps = naps;
     }
 
