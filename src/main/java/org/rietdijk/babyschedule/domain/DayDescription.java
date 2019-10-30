@@ -13,6 +13,8 @@ public class DayDescription implements Serializable {
     private int id;
     private String description;
     private String date;
+    private int weight;
+
     @OneToMany(mappedBy ="day")
     @JsonManagedReference
     private List<Nap> naps;
@@ -59,5 +61,13 @@ public class DayDescription implements Serializable {
 
     public void setFeedings(List<Feeding> feedings) {
         this.feedings = feedings;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
     }
 }
