@@ -1,14 +1,11 @@
 package org.rietdijk.babyschedule.controller;
 
-import org.rietdijk.babyschedule.domain.DayDescription;
 import org.rietdijk.babyschedule.domain.Nap;
 import org.rietdijk.babyschedule.service.DayDescriptionService;
 import org.rietdijk.babyschedule.service.NapService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @CrossOrigin("http://localhost:4200")
 @RestController

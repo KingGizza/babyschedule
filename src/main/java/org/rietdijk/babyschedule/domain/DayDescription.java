@@ -17,10 +17,9 @@ public class DayDescription implements Serializable {
     @JsonManagedReference
     private List<Nap> naps;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
-    @OrderColumn(name="time")
-    @JoinColumn(name="dayId",referencedColumnName="id")
-    private Feeding[] feedings;
+    @OneToMany(mappedBy ="day")
+    @JsonManagedReference
+    private List<Feeding> feedings;
 
     public List<Nap> getNaps() {
         return naps;
@@ -54,11 +53,11 @@ public class DayDescription implements Serializable {
         this.date = date;
     }
 
-    public Feeding[] getFeedings() {
+    public List<Feeding> getFeedings() {
         return feedings;
     }
 
-    public void setFeedings(Feeding[] feedings) {
+    public void setFeedings(List<Feeding> feedings) {
         this.feedings = feedings;
     }
 }

@@ -1,5 +1,7 @@
 package org.rietdijk.babyschedule.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,14 +11,23 @@ public class Feeding {
     int feedingId;
     String time;
     int amount;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="dayId", insertable=false, updatable=false)
+    @JsonBackReference
+    @ManyToOne
+    DayDescription day;
     public int getFeedingId() {
         return feedingId;
     }
 
     public void setFeedingId(int feedingId) {
         this.feedingId = feedingId;
+    }
+
+    public DayDescription getDay() {
+        return day;
+    }
+
+    public void setDay(DayDescription day) {
+        this.day = day;
     }
 
     public String getTime() {
