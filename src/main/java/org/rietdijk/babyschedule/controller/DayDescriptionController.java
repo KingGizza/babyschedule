@@ -1,6 +1,7 @@
 package org.rietdijk.babyschedule.controller;
 
 import org.rietdijk.babyschedule.SortByStart;
+import org.rietdijk.babyschedule.SortByTime;
 import org.rietdijk.babyschedule.domain.DayDescription;
 import org.rietdijk.babyschedule.domain.Nap;
 import org.rietdijk.babyschedule.service.DayDescriptionService;
@@ -28,6 +29,7 @@ public class DayDescriptionController {
     DayDescription getDayDescriptionById(@PathVariable int id){
         dayDescriptionService.findById(id).ifPresent((day) -> this.dayDescription = day);
         Collections.sort(dayDescription.getNaps(), new SortByStart());
+        Collections.sort(dayDescription.getFeedings(), new SortByTime());
         return dayDescription;
         }
 
