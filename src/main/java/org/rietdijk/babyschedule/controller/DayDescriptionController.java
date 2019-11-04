@@ -3,15 +3,12 @@ package org.rietdijk.babyschedule.controller;
 import org.rietdijk.babyschedule.SortByStart;
 import org.rietdijk.babyschedule.SortByTime;
 import org.rietdijk.babyschedule.domain.DayDescription;
-import org.rietdijk.babyschedule.domain.Nap;
 import org.rietdijk.babyschedule.service.DayDescriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
+import javax.validation.Valid;
 import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin("http://localhost:4200")
 @RestController
@@ -34,7 +31,7 @@ public class DayDescriptionController {
         }
 
     @PostMapping("/description")
-    DayDescription postDaydescription(@RequestBody DayDescription dayDescription){
+    DayDescription postDaydescription(@Valid @RequestBody DayDescription dayDescription){
         return dayDescriptionService.save(dayDescription);
     }
 

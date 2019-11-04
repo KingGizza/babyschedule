@@ -3,7 +3,9 @@ package org.rietdijk.babyschedule.domain;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -12,6 +14,7 @@ public class DayDescription implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String description;
+    @NotBlank
     private String date;
     private int weight;
 
