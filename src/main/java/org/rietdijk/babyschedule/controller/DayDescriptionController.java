@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Collections;
 
 @CrossOrigin("http://localhost:4200")
 @RestController
@@ -18,31 +17,47 @@ public class DayDescriptionController {
     DayDescription dayDescription;
 
     @GetMapping("/description")
-    Iterable<DayDescription> getDayDescription(){
+    Iterable<DayDescription> getDayDescription() {
         return dayDescriptionService.findAll();
-
     }
-    @GetMapping("/description/{id}")
-    DayDescription getDayDescriptionById(@PathVariable int id){
-        dayDescriptionService.findById(id).ifPresent((day) -> this.dayDescription = day);
-        Collections.sort(dayDescription.getNaps(), new SortByStart());
-        Collections.sort(dayDescription.getFeedings(), new SortByTime());
-        return dayDescription;
+
+    @GetMapping("/day/{date}")
+    DayDescription getDayDescriptionByDate(@PathVariable String date) {
+        DayDescription day = dayDescriptionService.findByDate(date);
+        if (day != null) {
+            return day;
+        } else {
+            DayDescription newDate = new DayDescription(date);
+            return postDaydescription(newDate);
         }
+    }
+
+    @GetMapping("/detail/{id}")
+    DayDescription getDayDescriptionById(@PathVariable int id) {
+        dayDescriptionService.findById(id).ifPresent((day) -> this.dayDescription = day);
+        dayDescription.getNaps().sort(new SortByStart());
+        dayDescription.getFeedings().sort(new SortByTime());
+        return dayDescription;
+    }
 
     @PostMapping("/description")
-    DayDescription postDaydescription(@Valid @RequestBody DayDescription dayDescription){
-        dayDescription.setDate(dayDescription.getDate().substring(0,10));
+    DayDescription postDaydescription(@Valid @RequestBody DayDescription dayDescription) {
+        Iterable<DayDescription> descriptionList = getDayDescription();
+        for (DayDescription description : descriptionList) {
+            if (description.getDate().equals(dayDescription.getDate())) {
+                dayDescription.setId(description.getId());
+            }
+        }
         return dayDescriptionService.save(dayDescription);
     }
 
     @PutMapping("/description")
-    DayDescription updateDaydescription(@RequestBody DayDescription dayDescription){
+    DayDescription updateDaydescription(@RequestBody DayDescription dayDescription) {
         return dayDescriptionService.save(dayDescription);
     }
 
     @DeleteMapping("/description/{id}")
-    void deleteDescription(@PathVariable int id){
+    void deleteDescription(@PathVariable int id) {
         dayDescriptionService.deleteById(id);
     }
 }

@@ -11,6 +11,14 @@ import java.util.List;
 @Entity
 @Table(name="Day")
 public class DayDescription implements Serializable {
+    public DayDescription(@NotBlank String date) {
+        this.date = date;
+    }
+
+    public DayDescription() {
+        super();
+    }
+
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String description;
