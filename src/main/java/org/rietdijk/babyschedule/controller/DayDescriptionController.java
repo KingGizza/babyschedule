@@ -32,6 +32,7 @@ public class DayDescriptionController {
 
     @PostMapping("/description")
     DayDescription postDaydescription(@Valid @RequestBody DayDescription dayDescription){
+        dayDescription.setDate(dayDescription.getDate().substring(0,10));
         return dayDescriptionService.save(dayDescription);
     }
 
