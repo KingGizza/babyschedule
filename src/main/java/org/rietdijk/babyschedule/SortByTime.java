@@ -7,8 +7,8 @@ import java.util.Comparator;
 
 public class SortByTime implements Comparator<Feeding> {
     public int compare(Feeding a, Feeding b){
-        LocalTime timeA = LocalTime.parse(a.getTime());
-        LocalTime timeB = LocalTime.parse(b.getTime());
+        LocalTime timeA = LocalTime.parse(a.getStart());
+        LocalTime timeB = LocalTime.parse(b.getStart());
         if (timeA.isBefore(timeB)) {
             return -1;
         } else {

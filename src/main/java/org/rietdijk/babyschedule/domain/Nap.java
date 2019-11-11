@@ -10,9 +10,10 @@ import java.io.Serializable;
 public class Nap implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int napId;
+    int id;
     private String start;
     private String end;
+    String soort = "Dutje";
 
     @JsonBackReference
     @ManyToOne
@@ -26,12 +27,12 @@ public class Nap implements Serializable {
         this.day = day;
     }
 
-    public int getNapId() {
-        return napId;
+    public int getId() {
+        return id;
     }
 
-    public void setNapId(int napId) {
-        this.napId = napId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getStart() {
@@ -50,4 +51,11 @@ public class Nap implements Serializable {
         this.end = end;
     }
 
+    public String getSoort() {
+        return soort;
+    }
+
+    public void setSoort(String soort) {
+        this.soort = soort;
+    }
 }

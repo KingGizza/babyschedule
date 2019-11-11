@@ -8,18 +8,20 @@ import javax.persistence.*;
 public class Feeding {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int feedingId;
-    String time;
+    int id;
+    String start;
     int amount;
+    String soort="Voeding";
     @JsonBackReference
     @ManyToOne
     DayDescription day;
-    public int getFeedingId() {
-        return feedingId;
+
+    public int getId() {
+        return id;
     }
 
-    public void setFeedingId(int feedingId) {
-        this.feedingId = feedingId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public DayDescription getDay() {
@@ -30,12 +32,12 @@ public class Feeding {
         this.day = day;
     }
 
-    public String getTime() {
-        return time;
+    public String getStart() {
+        return start;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setStart(String start) {
+        this.start = start;
     }
 
     public int getAmount() {
@@ -44,5 +46,13 @@ public class Feeding {
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public String getSoort() {
+        return soort;
+    }
+
+    public void setSoort(String soort) {
+        this.soort = soort;
     }
 }
