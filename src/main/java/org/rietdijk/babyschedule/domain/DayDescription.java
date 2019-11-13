@@ -34,6 +34,18 @@ public class DayDescription implements Serializable {
     @JsonManagedReference
     private List<Feeding> feedings;
 
+    @OneToMany(mappedBy ="day")
+    @JsonManagedReference
+    private List<Meal> meals;
+
+    public List<Meal> getMeals() {
+        return meals;
+    }
+
+    public void setMeals(List<Meal> meals) {
+        this.meals = meals;
+    }
+
     public List<Nap> getNaps() {
         return naps;
     }
