@@ -11,7 +11,7 @@ public class Feeding {
     int id;
     String start;
     int amount;
-    String soort="Voeding";
+    String soort="Drinken";
     @JsonBackReference
     @ManyToOne
     DayDescription day;
